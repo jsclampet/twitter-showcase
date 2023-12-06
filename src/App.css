@@ -5,8 +5,9 @@
 }
 .nav-bar {
   padding: 20px;
+  padding-left: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .nav-icon {
   display: flex;
@@ -16,6 +17,7 @@
   color: #f0f4f8;
   border: 2px #f0f4f8 solid;
   margin: 0 15px;
+  margin-left: 0;
   margin-bottom: 10px;
   height: 100px;
   width: 100px;
