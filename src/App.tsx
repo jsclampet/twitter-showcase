@@ -10,23 +10,24 @@ const App = () => {
   return (
     <div className="main-container">
       <nav className="nav-bar">
-        <Link to="/home" style={{ textDecoration: "none" }}>
+        <Link to="/home" style={{ textDecoration: "none", fontSize: 24 }}>
           <div className="nav-icon">
             <FaHome />
-            Home
           </div>
+          <p>Home</p>
         </Link>
-        <Link to="/search" style={{ textDecoration: "none" }}>
+        <Link to="/search" style={{ textDecoration: "none", fontSize: 24 }}>
           <div className="nav-icon">
             <FaSearch />
-            Search
           </div>
+
+          <p>Search</p>
         </Link>
-        <Link to="/showcase" style={{ textDecoration: "none" }}>
+        <Link to="/showcase" style={{ textDecoration: "none", fontSize: 24 }}>
           <div className="nav-icon">
             <FaStar />
-            Showcase
           </div>
+          <p>Showcase</p>
         </Link>
       </nav>
 
