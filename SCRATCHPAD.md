@@ -19,4 +19,6 @@ Great website color choices
 To Do Next:
 
 -Finish Home Page layout
-  -add cell responsiveness
+  -add mobile responsiveness
+
+- DOUBLE CHECK EVERYTHING IN THE Ui , 
