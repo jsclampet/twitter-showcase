@@ -1,3 +1,8 @@
-.showcase-container h1 {
-  margin-bottom: 25px;
+.showcase-container {
+  width: 825px;
+  margin: auto;
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
