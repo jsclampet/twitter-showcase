@@ -16,9 +16,28 @@ Great website color choices
 - https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/09/Slumber-website-screenshot.webp
 - https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/09/Neuro-symbolic-AI-website-screenshot.webp
 
+_______________
+_______________
+_______________
+
 To Do Next:
 
+Review Andy's videos
+- Twitter Dev account
+- Twitter app
+- Twitter docs
+- Twitter auth
+  
+Look up GitHub branching:
+- Code with mosh??? 
+  
+Start backend server:
+- Connect to Twitter API
+- Setup GET request
+
+
+
+_______
 -Finish Home Page layout
   -add mobile responsiveness
 
-- DOUBLE CHECK EVERYTHING IN THE Ui , 
