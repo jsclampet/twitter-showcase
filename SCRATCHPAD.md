@@ -17,7 +17,6 @@ Great website color choices
 - https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/09/Neuro-symbolic-AI-website-screenshot.webp
 
 To Do Next:
--MAYBE move Navbar to its own component, cleans up App.tsx 
+
 -Finish Home Page layout
   -add cell responsiveness
-    -Especially to "App" main-container
