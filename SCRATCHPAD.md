@@ -4,7 +4,7 @@ COLOR SCHEME
 - #56B2BB ... Highlight
   Mainly based off 
   - https://images.ctfassets.net/h6goo9gw1hh6/3FQOGeVjnxzlsKQUlu1Bkg/cd3dfe65bc0b3a075d4f675ff9af44d1/Color-Scheme_Class-2.jpg?w=1600&h=700&q=70&fm=webp
-  
+
 
 
 Great website color choices
@@ -40,4 +40,3 @@ Start backend server:
 _______
 -Finish Home Page layout
   -add mobile responsiveness
-

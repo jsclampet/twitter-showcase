@@ -6,6 +6,7 @@
   padding: 10px 20px;
   border-radius: 20px;
   margin-bottom: 20px;
+  border: 0.5px solid #f0f4f8;
 }
 .tweet-card img {
   width: 65px;
@@ -18,6 +19,9 @@
 }
 .tweet-card .icons {
   display: flex;
+}
+.tweet-card .icons p {
+  margin-right: 10px;
 }
 .verified-check {
   width: 10px;
