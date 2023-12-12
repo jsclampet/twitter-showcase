@@ -56,3 +56,4 @@ Tweets need to include
 
 
 NEED TO MAKE A GET REQUEST TO GET RANDOM DATA FROM TOP 5 INFLUENTIAL TWITTER USERS ( FOR ME )
+Maybe Also Add/Edit dotenv variable integration
