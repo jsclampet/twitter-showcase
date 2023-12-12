@@ -22,13 +22,23 @@ app.get("/api/users/:username", (req, res) => {
   apiClient
     .get(`/users/by/username/${req.params.username}`)
     .then(({ data }) => {
+      console.log(data.data);
       res.send(data.data);
     });
 });
 
 app.get("/api/tweet/:query", (req, res) => {
+  const responseObject = {};
   apiClient.get(getTweetsUrl + req.params.query).then(({ data }) => {
-    res.send(data);
+    responseObject.retweetCount = JSON.stringify(
+      data.data[0].public_metrics.retweet_count
+    );
+    responseObject.like_Count = JSON.stringify(
+      data.data[0].public_metrics.like_count
+    );
+    responseObject.username = JSON.stringify(data.includes.users[0].username);
+    console.log(responseObject);
+    res.send(JSON.stringify(data.data[0].public_metrics.retweet_count));
   });
 });
 
