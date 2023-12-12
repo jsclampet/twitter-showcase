@@ -41,3 +41,18 @@ Start backend server:
 _______
 -Finish Home Page layout
   -add mobile responsiveness
+
+
+Tweets need to include
+-text
+-username
+-image (or placeholder if non-existent)
+-retweet count
+-favorite (hearted) count
+
+^^^ Public Metrics, and expansion - user ... this is where you can find MOST of this info 
+- HOWEVER , still need to figure out how to get ***FULL TEXT*** and ***USER IMAGE URL***
+- Maybe I can do a serial request for each??? ... 
+
+
+NEED TO MAKE A GET REQUEST TO GET RANDOM DATA FROM TOP 5 INFLUENTIAL TWITTER USERS ( FOR ME )
