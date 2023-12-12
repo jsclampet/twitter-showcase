@@ -19,9 +19,18 @@ app.get("/api/users/:username", (req, res) => {
   console.log(req.params.username || "get request");
   apiClient
     .get(`/users/by/username/${req.params.username}`)
-    .then((response) => {
-      console.log(response.data);
-      res.send(response.data);
+    .then(({ data }) => {
+      res.send(data.data);
+    });
+});
+
+app.get("/api/tweet/:query", (req, res) => {
+  apiClient
+    .get(
+      "https://api.twitter.com/2/tweets/search/recent?query=" + req.params.query
+    )
+    .then(({ data }) => {
+      res.send(data.data);
     });
 });
 
