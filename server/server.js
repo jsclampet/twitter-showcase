@@ -5,6 +5,8 @@ const axios = require("axios").default;
 const baseURL = "https://api.twitter.com/2";
 const token =
   "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
+const getTweetsUrl =
+  "https://api.twitter.com/2/tweets/search/recent?tweet.fields=public_metrics&expansions=author_id&query=";
 
 const apiClient = axios.create({
   baseURL,
@@ -25,13 +27,9 @@ app.get("/api/users/:username", (req, res) => {
 });
 
 app.get("/api/tweet/:query", (req, res) => {
-  apiClient
-    .get(
-      "https://api.twitter.com/2/tweets/search/recent?query=" + req.params.query
-    )
-    .then(({ data }) => {
-      res.send(data.data);
-    });
+  apiClient.get(getTweetsUrl + req.params.query).then(({ data }) => {
+    res.send(data);
+  });
 });
 
 app.listen(PORT, () => {
