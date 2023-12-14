@@ -59,3 +59,11 @@ NEED TO MAKE A GET REQUEST TO GET RANDOM DATA FROM TOP 5 INFLUENTIAL TWITTER USE
 Maybe Also Add/Edit dotenv variable integration
 
 - https://api.twitter.com/2/users/{ userid /tweets?exclude=replies,retweets
+
+
+User IDs
+Elon Musk -       44196397
+Ali Abdaal -      30436279
+Mr Beast -        2455740283
+Tim Cook -        1636590253
+Steve Wozniak -   22938914
