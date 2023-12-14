@@ -62,8 +62,8 @@ Maybe Also Add/Edit dotenv variable integration
 
 
 User IDs
-Elon Musk -       44196397
-Ali Abdaal -      30436279
-Mr Beast -        2455740283
-Tim Cook -        1636590253
-Steve Wozniak -   22938914
+Elon Musk -       44196397, elonmusk
+Ali Abdaal -      30436279, AliAbdaal
+Mr Beast -        2455740283, MrBeast
+Tim Cook -        1636590253, tim_cook
+Steve Wozniak -   22938914, stevewoz
