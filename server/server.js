@@ -57,19 +57,29 @@ app.get("/api/showcase", (req, res) => {
   const responseObjectArray = [];
   twitterAPI.get(showcaseURL).then(({ data }) => {
     console.log(data);
-
-    console.log(data.data.map((item) => item.most_recent_tweet_id));
+    const userIDs = data.data
+      .map((item) => item.most_recent_tweet_id)
+      .join(",");
+    console.log(data.data.map((item) => item.most_recent_tweet_id).join(","));
     res.send(data);
 
     data.data.forEach((item) => {
       const responseObject = {};
       responseObject.username = item.username;
       responseObject.profile_image_url = item.profile_image_url;
+      // twitterAPI
+      //   .get("https://api.twitter.com/2/tweets/" + item.most_recent_tweet_id)
+      //   .then((response) => {
+      //     console.log(response.data);
+      //   });
       twitterAPI
-        .get("https://api.twitter.com/2/tweets/" + item.most_recent_tweet_id)
-        .then((response) => {
-          console.log(response.data);
-        });
+        .get("https://api.twitter.com/2/tweets?ids=" + userIDs)
+        .then((response) =>
+          console.log(
+            "<<<<<<<<<<<< ALL USER IDS TWEETS RESPONSE",
+            response.data
+          )
+        );
     });
   });
 });
