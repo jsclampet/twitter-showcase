@@ -8,7 +8,7 @@ const token =
 const getTweetsUrl =
   "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
 
-const apiClient = axios.create({
+const twitterAPI = axios.create({
   baseURL,
   headers: { Authorization: `Bearer ${token}` },
 });
@@ -18,39 +18,35 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 app.get("/api/users/:username", (req, res) => {
-  console.log(req.params.username || "get request");
-  apiClient
+  twitterAPI
     .get(`/users/by/username/${req.params.username}`)
     .then(({ data }) => {
-      console.log(data.data);
       res.send(data.data);
     });
 });
 
 app.get("/api/tweet/:query", (req, res) => {
-  const responseObject = {};
   const responseObjectArray = [];
-  apiClient.get(getTweetsUrl + req.params.query).then(({ data }) => {
-    data.data.forEach((dataItem, index) => {
-      responseObject.retweet_count = JSON.stringify(
-        dataItem.public_metrics.retweet_count
-      );
-      responseObject.like_Count = JSON.stringify(
-        dataItem.public_metrics.like_count
-      );
-      responseObject.username = JSON.stringify(
-        data.includes.users[index].username
-      );
-      responseObject.profile_image_url = JSON.stringify(
-        data.includes.users[index].profile_image_url
-      );
-      responseObject.like_Count = JSON.stringify(
-        dataItem.public_metrics.like_count
-      );
-      responseObject.tweet_text = JSON.stringify(dataItem.text);
+  twitterAPI.get(getTweetsUrl + req.params.query).then(({ data }) => {
+    let responseObject = {};
+    userIDs = data.includes.users.map((item) => item.id);
+    tweetAuthorIDs = data.data.map((item) => item.author_id);
+
+    data.data.forEach((tweetData, index) => {
+      const userIndex = userIDs.indexOf(tweetAuthorIDs[index]);
+      responseObject = {
+        retweet_count: JSON.stringify(tweetData.public_metrics.retweet_count),
+        like_Count: JSON.stringify(tweetData.public_metrics.like_count),
+        username: JSON.stringify(data.includes.users[userIndex].username),
+        profile_image_url: JSON.stringify(
+          data.includes.users[userIndex].profile_image_url
+        ),
+        tweet_text: JSON.stringify(tweetData.text),
+      };
+
       responseObjectArray.push(responseObject);
     });
-    console.log(responseObjectArray);
+
     res.send(responseObjectArray);
   });
 });
