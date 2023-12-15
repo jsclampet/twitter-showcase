@@ -36,3 +36,11 @@ Ali Abdaal -      30436279, AliAbdaal
 Mr Beast -        2455740283, MrBeast
 Tim Cook -        1636590253, tim_cook
 Steve Wozniak -   22938914, stevewoz
+
+
+NEED TO CREATE SHOWCASE REQUEST
+https://api.twitter.com/2/users?expansions=pinned_tweet_id&user.fields=most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914
+
+ALSO *** LOOK UP EXCLUDES (RETWEETS, REPLIES) ON RECENT TWEETS LOOKUP
+
+from Most Recent Tweet, gather <retweet_count>, <like_count>, and <text>

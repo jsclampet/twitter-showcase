@@ -7,6 +7,8 @@ const token =
   "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
 const getTweetsUrl =
   "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
+const showcaseURL =
+  "https://api.twitter.com/2/users?expansions=pinned_tweet_id&user.fields=profile_image_url,most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914";
 
 const twitterAPI = axios.create({
   baseURL,
@@ -48,6 +50,27 @@ app.get("/api/tweet/:query", (req, res) => {
     });
 
     res.send(responseObjectArray);
+  });
+});
+
+app.get("/api/showcase", (req, res) => {
+  const responseObjectArray = [];
+  twitterAPI.get(showcaseURL).then(({ data }) => {
+    console.log(data);
+
+    console.log(data.data.map((item) => item.most_recent_tweet_id));
+    res.send(data);
+
+    data.data.forEach((item) => {
+      const responseObject = {};
+      responseObject.username = item.username;
+      responseObject.profile_image_url = item.profile_image_url;
+      twitterAPI
+        .get("https://api.twitter.com/2/tweets/" + item.most_recent_tweet_id)
+        .then((response) => {
+          console.log(response.data);
+        });
+    });
   });
 });
 
