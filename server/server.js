@@ -9,6 +9,9 @@ const getTweetsUrl =
   "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
 const showcaseURL =
   "https://api.twitter.com/2/users?expansions=pinned_tweet_id&user.fields=profile_image_url,most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914";
+const tweetsByUser = (userID) => {
+  return `https://api.twitter.com/2/users/${userID}/tweets`;
+};
 
 const twitterAPI = axios.create({
   baseURL,
@@ -19,14 +22,21 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
+//search for user
 app.get("/api/users/:username", (req, res) => {
   twitterAPI
-    .get(`/users/by/username/${req.params.username}`)
+    .get(
+      `/users/by/username/${req.params.username}?user.fields=profile_image_url`
+    )
     .then(({ data }) => {
       res.send(data.data);
+      twitterAPI.get(tweetsByUser(data.data.id)).then((result) => {
+        console.log(result.data.data);
+      });
     });
 });
 
+// search for tweet
 app.get("/api/tweet/:query", (req, res) => {
   const responseObjectArray = [];
   twitterAPI.get(getTweetsUrl + req.params.query).then(({ data }) => {
@@ -53,6 +63,7 @@ app.get("/api/tweet/:query", (req, res) => {
   });
 });
 
+// showcase
 app.get("/api/showcase", (req, res) => {
   const responseObjectArray = [];
   twitterAPI.get(showcaseURL).then(({ data }) => {
