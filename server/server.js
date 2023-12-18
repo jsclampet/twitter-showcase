@@ -10,7 +10,7 @@ const getTweetsUrl =
 const showcaseURL =
   "https://api.twitter.com/2/users?expansions=pinned_tweet_id&user.fields=profile_image_url,most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914";
 const tweetsByUser = (userID) => {
-  return `https://api.twitter.com/2/users/${userID}/tweets`;
+  return `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics`;
 };
 
 const twitterAPI = axios.create({
@@ -24,15 +24,29 @@ app.use(express.json());
 
 //search for user
 app.get("/api/users/:username", (req, res) => {
+  const responseObject = {};
+  let userID;
   twitterAPI
     .get(
       `/users/by/username/${req.params.username}?user.fields=profile_image_url`
     )
-    .then(({ data }) => {
-      res.send(data.data);
-      twitterAPI.get(tweetsByUser(data.data.id)).then((result) => {
-        console.log(result.data.data);
-      });
+    .then((usernameData) => {
+      responseObject.message = usernameData.data.text;
+      responseObject.like_count = usernameData.data.like_count;
+      console.log(usernameData.data);
+      res.send(usernameData.data);
+      // responseObject.retweet_count =
+      //   usernameData.data.public_metrics.retweet_count;
+      userID = usernameData.data.id;
+      twitterAPI
+        .get(
+          `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics`
+        )
+        .then((tweetData) => {
+          // responseObject.username = tweetData.data.username;
+          // responseObject.profile_image_url = tweetData.data.profile_image_url;
+          // res.send(usernameData.data, tweetData.data);
+        });
     });
 });
 
@@ -40,6 +54,7 @@ app.get("/api/users/:username", (req, res) => {
 app.get("/api/tweet/:query", (req, res) => {
   const responseObjectArray = [];
   twitterAPI.get(getTweetsUrl + req.params.query).then(({ data }) => {
+    console.log(data.data);
     let responseObject = {};
     userIDs = data.includes.users.map((item) => item.id);
     tweetAuthorIDs = data.data.map((item) => item.author_id);
