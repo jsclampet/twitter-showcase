@@ -7,7 +7,7 @@ const token =
   "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
 const getTweetsUrl =
   "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
-const showcaseURL =
+const getUserURL =
   "https://api.twitter.com/2/users?user.fields=profile_image_url,most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914";
 const tweetsByUser = (userID) => {
   return `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics`;
@@ -70,20 +70,18 @@ app.get("/api/tweet/:query", async (req, res) => {
 
 // showcase
 app.get("/api/showcase", async (req, res) => {
-  const responseObjectArray = [];
-  const showcaseRequest = await twitterAPI.get(showcaseURL);
-  const userIDs = showcaseRequest.data.data.map((item) => item.id);
-  const usersTweetsRequest = await userIDs.map((id) =>
-    twitterAPI.get(
-      `https://api.twitter.com/2/users/${id}/tweets?tweet.fields=public_metrics`
-    )
+  const randomIndex = () => Math.floor(Math.random() * 5);
+  const selectedUser = userIDs[randomIndex()];
+
+  const usersTweetsRequest = await twitterAPI.get(
+    `https://api.twitter.com/2/users?ids=${selectedUser}`
   );
-  const tweetsRequest = res.send(usersTweetsRequest.data);
+
   console.log(usersTweetsRequest.data);
-  res.send(usersTweetsRequest.data);
-  showcaseRequest.data.data.forEach((item) => {
-    const responseObject = {};
-  });
+  // res.send(usersTweetsRequest.data);
+  // showcaseRequest.data.data.forEach((item) => {
+  //   const responseObject = {};
+  // });
 });
 
 app.listen(PORT, () => {
