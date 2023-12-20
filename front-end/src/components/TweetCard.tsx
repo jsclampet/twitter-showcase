@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./TweetCard.css";
-import React from "react";
+
 
 interface Tweet {
   message: string;
