@@ -7,10 +7,8 @@ const token =
   "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
 const getTweetsUrl =
   "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
-const getUserURL =
-  "https://api.twitter.com/2/users?user.fields=profile_image_url,most_recent_tweet_id&ids=44196397,30436279,2455740283,1636590253,22938914";
 const tweetsByUser = (userID) => {
-  return `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics`;
+  return `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics&exclude=replies`;
 };
 
 const apiClient = axios.create({
@@ -70,14 +68,36 @@ app.get("/api/tweet/:query", async (req, res) => {
 
 // showcase
 app.get("/api/showcase", async (req, res) => {
-  const randomIndex = () => Math.floor(Math.random() * 5);
-  const selectedUser = userIDs[randomIndex()];
+  const userIDs = [
+    "44196397",
+    "22938914",
+    "226428094",
+    "4416456732",
+    "29873662",
+  ];
 
+  const randomIndex = (num) => Math.floor(Math.random() * num);
+  const selectedUser = userIDs[randomIndex(5)];
+
+  //returns username and image url
   const usersTweetsRequest = await apiClient.get(
-    `https://api.twitter.com/2/users?ids=${selectedUser}`
+    `https://api.twitter.com/2/users?ids=${selectedUser}&user.fields=profile_image_url`
   );
 
-  console.log(usersTweetsRequest.data);
+  const tweetDataRequest = await apiClient.get(tweetsByUser(selectedUser));
+  const tweet =
+    tweetDataRequest.data.data[randomIndex(tweetDataRequest.data.data.length)];
+
+  const userObject = {
+    username: usersTweetsRequest.data.data[0].username,
+    image: usersTweetsRequest.data.data[0].profile_image_url,
+    tweetText: tweet.text,
+    retweet_count: tweet.public_metrics.retweet_count,
+    like_count: tweet.public_metrics.like_count,
+  };
+
+  console.log(userObject);
+  res.send(userObject);
 });
 
 app.listen(PORT, () => {
