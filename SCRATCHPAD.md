@@ -44,3 +44,23 @@ https://api.twitter.com/2/users?expansions=pinned_tweet_id&user.fields=most_rece
 ALSO *** LOOK UP EXCLUDES (RETWEETS, REPLIES) ON RECENT TWEETS LOOKUP
 
 from Most Recent Tweet, gather <retweet_count>, <like_count>, and <text>
+
+
+EXAMPLE OF <<< search for user >>>
+{
+  "message": "RT @IfNotNowOrg: It’s outrageous and disturbing that @SpeakerJohnson is calling our nonviolent protest “pro-Hamas” &amp; antisemitic.\n\nWe are J…",
+  "like_count": 0,
+  "retweet_count": 1756,
+  "username": "elon",
+  "profile_image_url": "https://pbs.twimg.com/profile_images/1129911827867901952/Axt070bB_normal.png"
+}
+
+EXAMPLE OF <<< search for tweet >>>
+{
+  "retweet_count": 0,
+  "like_Count": 0,
+  "username": "Diego061070",
+  "profile_image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+  "tweet_text": "@DesiSanatani @RadioGenoa NASA engineer on holiday in the UK 😁"
+}
+

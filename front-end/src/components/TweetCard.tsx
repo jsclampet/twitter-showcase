@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./TweetCard.css";
+import React from "react";
 
 interface Tweet {
   message: string;
@@ -10,7 +11,7 @@ interface Tweet {
 }
 
 const TweetCard = () => {
-  const [tweets, setTweets] = useState<Tweet[]>([]);
+  // const [tweets, setTweets] = useState<Tweet[]>([]);
 
   const placeHolderData = [
     {

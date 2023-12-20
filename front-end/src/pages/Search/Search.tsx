@@ -1,10 +1,11 @@
+import React from "react";
 import "./Search.css";
 
 const Search = () => {
   return (
-    <div className="search-container">
+    <form className="search-container">
       <input type="text" placeholder="Search by user or tweet content" />
-    </div>
+    </form>
   );
 };
 
