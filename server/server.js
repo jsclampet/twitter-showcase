@@ -18,7 +18,13 @@ const apiClient = axios.create({
 
 const PORT = process.env.PORT || 3002;
 
+app.use(express.static("../front-end"));
 app.use(express.json());
+
+//server up frontend
+app.get("/", (req, res) => {
+  res.sendFile("../front-end/index.html");
+});
 
 //search for user
 app.get("/api/users/:username", async (req, res) => {
