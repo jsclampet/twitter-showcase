@@ -31,11 +31,11 @@ app.get("/api/users/:username", async (req, res) => {
   );
   tweetRequest.data.data.forEach((item, index) => {
     let responseObject = {
-      message: item.text,
-      like_count: item.public_metrics.like_count,
-      retweet_count: item.public_metrics.retweet_count,
       username: userRequest.data.data.username,
       profile_image_url: userRequest.data.data.profile_image_url,
+      tweet_text: item.text,
+      retweet_count: item.public_metrics.retweet_count,
+      like_count: item.public_metrics.like_count,
     };
     responseObjectArray.push(responseObject);
   });
@@ -43,7 +43,7 @@ app.get("/api/users/:username", async (req, res) => {
 });
 
 // search for tweet
-app.get("/api/tweet/:query", async (req, res) => {
+app.get("/api/tweets/:query", async (req, res) => {
   const tweetRequest = await apiClient.get(getTweetsUrl + req.params.query);
 
   const userIDs = tweetRequest.data.includes.users.map((item) => item.id);
@@ -53,12 +53,12 @@ app.get("/api/tweet/:query", async (req, res) => {
   tweetRequest.data.data.forEach((tweetData, index) => {
     const userIndex = userIDs.indexOf(tweetAuthorIDs[index]);
     const responseObject = {
-      retweet_count: tweetData.public_metrics.retweet_count,
-      like_Count: tweetData.public_metrics.like_count,
       username: tweetRequest.data.includes.users[userIndex].username,
       profile_image_url:
         tweetRequest.data.includes.users[userIndex].profile_image_url,
       tweet_text: tweetData.text,
+      retweet_count: tweetData.public_metrics.retweet_count,
+      like_count: tweetData.public_metrics.like_count,
     };
     responseObjectArray.push(responseObject);
   });
@@ -79,7 +79,6 @@ app.get("/api/showcase", async (req, res) => {
   const randomIndex = (num) => Math.floor(Math.random() * num);
   const selectedUser = userIDs[randomIndex(5)];
 
-  //returns username and image url
   const usersTweetsRequest = await apiClient.get(
     `https://api.twitter.com/2/users?ids=${selectedUser}&user.fields=profile_image_url`
   );
@@ -90,13 +89,12 @@ app.get("/api/showcase", async (req, res) => {
 
   const userObject = {
     username: usersTweetsRequest.data.data[0].username,
-    image: usersTweetsRequest.data.data[0].profile_image_url,
-    tweetText: tweet.text,
+    profile_image_url: usersTweetsRequest.data.data[0].profile_image_url,
+    tweet_text: tweet.text,
     retweet_count: tweet.public_metrics.retweet_count,
     like_count: tweet.public_metrics.like_count,
   };
 
-  console.log(userObject);
   res.send(userObject);
 });
 
