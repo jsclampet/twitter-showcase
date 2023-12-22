@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const app = express();
 const axios = require("axios").default;
@@ -18,12 +19,12 @@ const apiClient = axios.create({
 
 const PORT = process.env.PORT || 3002;
 
-app.use(express.static("../front-end"));
+app.use(express.static("../front-end/dist"));
 app.use(express.json());
 
 //server up frontend
 app.get("/", (req, res) => {
-  res.sendFile("../front-end/index.html");
+  res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
 });
 
 //search for user
