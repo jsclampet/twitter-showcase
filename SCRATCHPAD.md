@@ -1,3 +1,12 @@
+# STILL NEEDED ...
+- Search page 
+  - Tweet/User toggle ...
+  - Show results
+    - Styling???
+  - Axios request to server @ search(tweet/user)
+    - GET/POST request??? (need to send input to req.body)
+
+
 ## Extra Ideas ... 
 - Make links hyperlinks/clickable
   - create function to parse through tweet_text, 
@@ -8,12 +17,16 @@
         - return normal text with link
       - No? 
         - return normal text
+  - MAYBE... see if theres a way to detect if its an img tag??? or website?
 - Error Handling
+  - Handle 'Too many request' and other types ... 
 
 
 
 
-# COLOR SCHEME
+
+
+### COLOR SCHEME
 - #0A0F22 ... Main Background
 - #f0f4f8 ... Main Text Color
 - #56B2BB ... Highlight

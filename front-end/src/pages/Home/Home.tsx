@@ -12,14 +12,14 @@ const Home = () => {
           </h2>
           <br />
           <h4>
-            <span>Search</span> 🔍 | view the latest tweets from your favorite
+            <span>Search</span> 🔍 View the latest tweets from your favorite
             twitter users
           </h4>
           <br />
           <br />
           <h4>
-            <span>Showcase</span> ⭐️ | Get recent tweets from some of the most
-            popular and influential public figures
+            <span>Showcase</span> ⭐️ Get recent tweets from the most popular
+            tech and productivity experts
           </h4>
         </div>
         <div className="content-group content-img">
