@@ -12,14 +12,25 @@
   margin-top: 30px;
   width: 500px;
   padding: 10px 20px;
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 20px;
   border: none;
+  outline: none;
 }
 
 .search-bar select {
   width: 100px;
-  padding: 8.5px 18.5px;
+  padding: 9px 19px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: #56B2BB;
+  color: #f0f4f8;
+  border: none;
+}
+.search-bar button {
+  width: 100px;
+  padding: 10px 20px;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
+  background-color: #56B2BB;
+  color: #f0f4f8;
+  border: none;
 }

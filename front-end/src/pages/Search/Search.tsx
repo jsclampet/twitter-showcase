@@ -1,14 +1,23 @@
+import { useState } from "react";
 import "./Search.css";
 
 const Search = () => {
+  const [apiOption, setApiOption] = useState("");
+  const handleSubmit = (apiUrl) => {};
+
   return (
-    <form className="search-container">
+    <form onSubmit={handleSubmit} className="search-container">
       <div className="search-bar">
-        <input type="text" placeholder="Search by user or tweet content" />
-        <select>
-          <option value="tweet">tweet</option>
-          <option value="user">user</option>
+        <select
+          onChange={(option) => {
+            setApiOption(option.target.value);
+          }}
+        >
+          <option value="tweet">TWEET</option>
+          <option value="user">USER</option>
         </select>
+        <input type="text" placeholder="Search by user or tweet content" />
+        <button type="submit">Search</button>
       </div>
     </form>
   );
