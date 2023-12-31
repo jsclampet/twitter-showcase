@@ -18,9 +18,17 @@
       - No? 
         - return normal text
   - MAYBE... see if theres a way to detect if its an img tag??? or website?
+
 - Error Handling
   - Handle 'Too many request' and other types ... 
 
+- Clean code 
+  - Add Modularity
+  - DRY ... 
+    - make functions re-usable
+    - structure functions to:
+      - Single Responsibility Principle (SRP)
+      - Separation of concerns
 
 
 
