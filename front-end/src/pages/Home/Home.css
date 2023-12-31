@@ -7,11 +7,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 .content-group {
   width: 50%;
 }
+.content-text {
+  padding: 0 40px;
+}
+
 .square-img {
   height: 300px;
   width: 300px;

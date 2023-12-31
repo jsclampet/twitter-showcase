@@ -23,6 +23,10 @@ app.use(express.static("../front-end/dist"));
 app.use(express.json());
 
 //server up frontend
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
+});
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
 });

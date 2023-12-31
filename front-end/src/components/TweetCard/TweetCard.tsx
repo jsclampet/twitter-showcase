@@ -1,7 +1,7 @@
 import "./TweetCard.css";
 
 export interface Tweet {
-  message: string;
+  tweet_text: string;
   username: string;
   profile_image_url: string;
   retweet_count: number;
@@ -23,7 +23,7 @@ const TweetCard = ({ tweetData }: Props) => {
         />
         <div className="content">
           <h4>{tweetData.username} ✓</h4>
-          <p>{tweetData.message}</p>
+          <p>{tweetData.tweet_text}</p>
           <div className="icons">
             <p>⏎ {tweetData.retweet_count}</p>
             <p>❤️ {tweetData.like_count}</p>

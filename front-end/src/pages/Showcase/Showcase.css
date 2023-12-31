@@ -3,6 +3,23 @@
   margin: auto;
   margin-top: 25px;
   display: flex;
+  flex-direction: column;
+}
+.showcase-container button {
+  margin: auto;
+  margin-bottom: 50px;
+  width: 200px;
+  padding: 15px 25px;
+  border-radius: 100px;
+  border: none;
+}
+.showcase-container button:hover {
+  background-color: #56B2BB;
+  color: #f0f4f8;
+  cursor: pointer;
+}
+.showcase-tweet {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
