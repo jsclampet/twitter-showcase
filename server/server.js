@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const axios = require("axios").default;
 
-const baseURL = "https://api.twitter.com/2";
 const token =
   "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
 const getTweetsUrl =
@@ -13,7 +12,7 @@ const tweetsByUser = (userID) => {
 };
 
 const apiClient = axios.create({
-  baseURL,
+  baseURL: "https://api.twitter.com/2",
   headers: { Authorization: `Bearer ${token}` },
 });
 
@@ -22,7 +21,7 @@ const PORT = process.env.PORT || 3002;
 app.use(express.static("../front-end/dist"));
 app.use(express.json());
 
-//server up frontend
+//serve up frontend
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
 });

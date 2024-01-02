@@ -6,6 +6,24 @@
   - Axios request to server @ search(tweet/user)
     - GET/POST request??? (need to send input to req.body)
 
+### UP NEXT ...
+- Need to test through server to avoid CORS errors
+- Search page tweet search works
+- Search page user search does NOT work ... figure this out ...
+  - Might be when theres a space??? 
+- ## NEED TO HANDLE ERRORS ... server keeps breaking in testing ... 
+<!-- 
+      title: 'Invalid Request',
+      detail: 'One or more parameters to your request was invalid.',
+      type: 'https://api.twitter.com/2/problems/invalid-request'
+ -->
+___
+- Test out Search functionality
+- Test out Search styling
+- Look up dotenv
+  - make sure that frontend/backend works together in sync
+- Review backend serving up frontend
+
 
 ## Extra Ideas ... 
 - Make links hyperlinks/clickable
@@ -40,3 +58,6 @@
 - #56B2BB ... Highlight
   - Mainly based off 
     - https://images.ctfassets.net/h6goo9gw1hh6/3FQOGeVjnxzlsKQUlu1Bkg/cd3dfe65bc0b3a075d4f675ff9af44d1/Color-Scheme_Class-2.jpg?w=1600&h=700&q=70&fm=webp
+
+- #1D2233
+- #BAC7CC

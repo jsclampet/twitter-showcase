@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import "./Search.css";
 import axios from "axios";
 
 const Search = () => {
   const [apiOption, setApiOption] = useState("tweet");
   const [searchQuery, setSearchQuery] = useState("");
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     apiOption === "tweet"
-      ? axios.post(`http://localhost:3002/api/tweets/`, searchQuery)
-      : axios.post(`http://localhost:3002/api/users/`, searchQuery);
+      ? axios
+          .get(`http://localhost:3002/api/tweets/${searchQuery}`)
+          .then(({ data }) => console.log("TWEET CALL ~~~ ", data))
+      : axios
+          .get(`http://localhost:3002/api/users/${searchQuery}`)
+          .then(({ data }) => console.log("USER CALL >>> ", data));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="search-container">
+    <form onSubmit={(e) => handleSubmit(e)} className="search-container">
       <div className="search-bar">
         <select
           onChange={(option) => {
@@ -23,7 +28,10 @@ const Search = () => {
           <option value="user">USER</option>
         </select>
         <input
-          onInput={(e) => setSearchQuery(e.currentTarget.value)}
+          onInput={(e) => {
+            setSearchQuery(e.currentTarget.value);
+            console.log(e.currentTarget.value);
+          }}
           type="text"
           placeholder="Search by user or tweet content"
         />

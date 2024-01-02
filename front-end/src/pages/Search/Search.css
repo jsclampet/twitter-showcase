@@ -27,10 +27,15 @@
 }
 .search-bar button {
   width: 100px;
-  padding: 10px 20px;
+  padding: 10.35px 20px;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   background-color: #56B2BB;
   color: #f0f4f8;
   border: none;
+}
+.search-bar button:hover,
+.search-bar select:hover {
+  background-color: #BAC7CC;
+  cursor: pointer;
 }
