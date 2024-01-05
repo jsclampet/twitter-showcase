@@ -21,15 +21,6 @@ const PORT = process.env.PORT || 3002;
 app.use(express.static("../front-end/dist"));
 app.use(express.json());
 
-//serve up frontend
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
-});
-
 //search for user
 app.get("/api/users/:username", async (req, res) => {
   const responseObjectArray = [];
@@ -106,6 +97,11 @@ app.get("/api/showcase", async (req, res) => {
   };
 
   res.send(userObject);
+});
+
+//CATCHALL serve up frontend
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "front-end", "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
