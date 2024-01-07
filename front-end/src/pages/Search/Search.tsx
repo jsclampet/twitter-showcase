@@ -1,20 +1,34 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import "./Search.css";
 import axios from "axios";
 import TweetCard, { Tweet } from "../../components/TweetCard/TweetCard";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Search = () => {
   const [apiOption, setApiOption] = useState("tweet");
   const [searchQuery, setSearchQuery] = useState("");
   const [tweets, setTweets] = useState<Tweet[]>();
 
+  const userSchema = z
+    .object({
+      username: z.string(),
+      tweet: z.string(),
+    })
+    .refine(({ username }) => !username.includes(" "), {
+      message: "Username cannot contain any spaces!",
+      path: ["username"],
+    });
+
+  type userSchemaType = z.infer<typeof userSchema>;
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<userSchemaType>({ resolver: zodResolver(userSchema) });
 
   const onSubmit = () => {
     apiOption === "tweet"
@@ -41,6 +55,7 @@ const Search = () => {
             <option value="user">USER</option>
           </select>
           <input
+            {...register("username")}
             onInput={(e) => {
               setSearchQuery(e.currentTarget.value);
             }}
@@ -55,6 +70,11 @@ const Search = () => {
             Search
           </button>
         </div>
+        {errors.username && (
+          <span className="username-error-message">
+            {errors.username.message}
+          </span>
+        )}
       </form>
       <div className="tweets-container">
         {tweets &&

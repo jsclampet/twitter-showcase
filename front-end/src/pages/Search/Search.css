@@ -18,7 +18,9 @@ form h1 {
   border: none;
   outline: none;
 }
-
+.username-error-message {
+  color: red;
+}
 .search-bar select {
   width: 100px;
   padding: 9px 19px;
