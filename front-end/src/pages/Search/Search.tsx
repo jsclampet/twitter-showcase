@@ -13,8 +13,8 @@ const Search = () => {
 
   const userSchema = z
     .object({
-      username: z.string(),
-      tweet: z.string(),
+      username: z.string().min(0),
+      tweet: z.string().min(1).optional(),
     })
     .refine(({ username }) => !username.includes(" "), {
       message: "Username cannot contain any spaces!",
@@ -39,7 +39,6 @@ const Search = () => {
           .get(`http://localhost:3002/api/users/${searchQuery}`)
           .then(({ data }) => setTweets(data));
     console.log(errors);
-    reset();
   };
 
   return (
@@ -55,7 +54,9 @@ const Search = () => {
             <option value="user">USER</option>
           </select>
           <input
-            {...register("username")}
+            {...(apiOption === "user"
+              ? { ...register("username") }
+              : { ...register("tweet") })}
             onInput={(e) => {
               setSearchQuery(e.currentTarget.value);
             }}
