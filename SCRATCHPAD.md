@@ -8,6 +8,7 @@
 - Review backend serving up frontend
 - Error Handling
   - Handle 'Too many request' and other types ... 
+- Add homepage images locally for smoother load times
 
 >>>>>>>>>>>>>
 
