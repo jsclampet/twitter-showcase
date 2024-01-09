@@ -4,13 +4,9 @@ form {
   flex-direction: column;
   align-items: center;
 }
-form h1 {
-  margin-bottom: 25px;
-}
 .search-bar {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
-
 .search-bar input {
   margin-top: 30px;
   width: 500px;
@@ -18,9 +14,9 @@ form h1 {
   border: none;
   outline: none;
 }
-.username-error-message {
+.error-message {
   color: red;
-  margin-top: 5px;
+  margin-top: -5px;
   margin-bottom: 15px;
 }
 .search-bar select {
@@ -54,9 +50,4 @@ form h1 {
 }
 .tweet-div {
   margin-bottom: 20px;
-}
-
-/* UTILITY */
-.hidden {
-  display: none;
 }

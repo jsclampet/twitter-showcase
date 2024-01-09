@@ -1,44 +1,15 @@
 # STILL NEEDED ...
-- Search page 
-  - Tweet/User toggle ...
-  - Show results
-    - Styling???
-  - Axios request to server @ search(tweet/user)
-    - GET/POST request??? (need to send input to req.body)
+- HANDLE requests on front end to display when user not found , or tweet not found 
+  - also handle this on the server to make sure it doesn't break
+- Apply environment variables to keep bearer token safe
 
-### UP NEXT ...
-- Need to test through server to avoid CORS errors
-- Search page tweet search works
-- Search page user search does NOT work ... figure this out ...
-  - Might be when theres a space??? 
-- ## NEED TO HANDLE ERRORS ... server keeps breaking in testing ... 
-<!-- 
-      title: 'Invalid Request',
-      detail: 'One or more parameters to your request was invalid.',
-      type: 'https://api.twitter.com/2/problems/invalid-request'
- -->
-___
-- Test out Search functionality
-- Test out Search styling
+## HOMEWORK
 - Look up dotenv
-  - make sure that frontend/backend works together in sync
 - Review backend serving up frontend
-
-
-## Extra Ideas ... 
-- Make links hyperlinks/clickable
-  - create function to parse through tweet_text, 
-    - 1. Turn string into array
-    - 2. Search for text with "http"
-      - Yes?
-        - make hyperlink (target = blank)
-        - return normal text with link
-      - No? 
-        - return normal text
-  - MAYBE... see if theres a way to detect if its an img tag??? or website?
-
 - Error Handling
   - Handle 'Too many request' and other types ... 
+
+>>>>>>>>>>>>>
 
 - Clean code 
   - Add Modularity
@@ -49,7 +20,7 @@ ___
       - Separation of concerns
 
 
-
+>>>>>>>>>>>>>
 
 
 ### COLOR SCHEME

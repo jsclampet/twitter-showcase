@@ -34,8 +34,12 @@ const Search = () => {
   if (apiOption === "tweet") {
     input = (
       <input
-        style={{ color: "red" }}
-        {...register("tweet")}
+        {...register("tweet", {
+          maxLength: {
+            value: 30,
+            message: "For optimal results, keep search to 30 character maximum",
+          },
+        })}
         onInput={(e) => {
           setSearchQuery(e.currentTarget.value);
         }}
@@ -47,6 +51,14 @@ const Search = () => {
     input = (
       <input
         {...register("username", {
+          minLength: {
+            value: 4,
+            message: "Please enter at LEAST 4 characters",
+          },
+          maxLength: {
+            value: 15,
+            message: "You can only enter a maximum of 15 characters",
+          },
           validate: (fieldValue) => {
             return (
               !fieldValue.includes(" ") || "Username cannot include any spaces."
@@ -78,9 +90,10 @@ const Search = () => {
           <button type="submit">Search</button>
         </div>
         {errors.username && (
-          <span className="username-error-message">
-            {errors.username.message}
-          </span>
+          <span className="error-message">{errors.username.message}</span>
+        )}
+        {errors.tweet && (
+          <span className="error-message">{errors.tweet.message}</span>
         )}
       </form>
       <div className="tweets-container">
