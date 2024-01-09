@@ -40,7 +40,8 @@ app.get("/api/users/:username", async (req, res) => {
     };
     responseObjectArray.push(responseObject);
   });
-  res.send(responseObjectArray).status(200);
+
+  res.send(responseObjectArray);
 });
 
 // search for tweet

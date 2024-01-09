@@ -3,37 +3,22 @@ import "./Search.css";
 import axios from "axios";
 import TweetCard, { Tweet } from "../../components/TweetCard/TweetCard";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+interface FormValues {
+  username: string;
+  tweet: string;
+}
 
 const Search = () => {
   const [apiOption, setApiOption] = useState("tweet");
   const [searchQuery, setSearchQuery] = useState("");
   const [tweets, setTweets] = useState<Tweet[]>();
 
-  const userSchema = z
-    .object({
-      username: z.string().trim().optional(),
-      tweet: z.string().min(1),
-    })
-    .refine(
-      ({ username }) => {
-        if (username) !username.includes(" ");
-      },
-      {
-        message: "Username cannot contain any spaces!",
-        path: ["username"],
-      }
-    );
-
-  type userSchemaType = z.infer<typeof userSchema>;
-
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<userSchemaType>({ resolver: zodResolver(userSchema) });
+    formState: { errors },
+  } = useForm<FormValues>();
 
   const onSubmit = () => {
     apiOption === "tweet"
@@ -45,9 +30,11 @@ const Search = () => {
           .then(({ data }) => setTweets(data));
   };
 
-  const input =
-    apiOption === "tweet" ? (
+  let input;
+  if (apiOption === "tweet") {
+    input = (
       <input
+        style={{ color: "red" }}
         {...register("tweet")}
         onInput={(e) => {
           setSearchQuery(e.currentTarget.value);
@@ -55,9 +42,17 @@ const Search = () => {
         type="text"
         placeholder={"Search by tweet content"}
       />
-    ) : (
+    );
+  } else if (apiOption === "user") {
+    input = (
       <input
-        {...register("username")}
+        {...register("username", {
+          validate: (fieldValue) => {
+            return (
+              !fieldValue.includes(" ") || "Username cannot include any spaces."
+            );
+          },
+        })}
         onInput={(e) => {
           setSearchQuery(e.currentTarget.value);
         }}
@@ -65,6 +60,7 @@ const Search = () => {
         placeholder={" Search by username. Do not include any spaces."}
       />
     );
+  }
 
   return (
     <div className="search-container">
