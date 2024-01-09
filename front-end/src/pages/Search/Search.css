@@ -53,3 +53,8 @@ form h1 {
 .tweet-div {
   margin-bottom: 20px;
 }
+
+/* UTILITY */
+.hidden {
+  display: none;
+}

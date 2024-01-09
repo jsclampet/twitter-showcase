@@ -13,13 +13,18 @@ const Search = () => {
 
   const userSchema = z
     .object({
-      username: z.string().min(0),
-      tweet: z.string().min(1).optional(),
+      username: z.string().trim().optional(),
+      tweet: z.string().min(1),
     })
-    .refine(({ username }) => !username.includes(" "), {
-      message: "Username cannot contain any spaces!",
-      path: ["username"],
-    });
+    .refine(
+      ({ username }) => {
+        if (username) !username.includes(" ");
+      },
+      {
+        message: "Username cannot contain any spaces!",
+        path: ["username"],
+      }
+    );
 
   type userSchemaType = z.infer<typeof userSchema>;
 
@@ -38,8 +43,28 @@ const Search = () => {
       : axios
           .get(`http://localhost:3002/api/users/${searchQuery}`)
           .then(({ data }) => setTweets(data));
-    console.log(errors);
   };
+
+  const input =
+    apiOption === "tweet" ? (
+      <input
+        {...register("tweet")}
+        onInput={(e) => {
+          setSearchQuery(e.currentTarget.value);
+        }}
+        type="text"
+        placeholder={"Search by tweet content"}
+      />
+    ) : (
+      <input
+        {...register("username")}
+        onInput={(e) => {
+          setSearchQuery(e.currentTarget.value);
+        }}
+        type="text"
+        placeholder={" Search by username. Do not include any spaces."}
+      />
+    );
 
   return (
     <div className="search-container">
@@ -53,23 +78,8 @@ const Search = () => {
             <option value="tweet">TWEET</option>
             <option value="user">USER</option>
           </select>
-          <input
-            {...(apiOption === "user"
-              ? { ...register("username") }
-              : { ...register("tweet") })}
-            onInput={(e) => {
-              setSearchQuery(e.currentTarget.value);
-            }}
-            type="text"
-            placeholder={
-              apiOption === "tweet"
-                ? "Search by tweet content"
-                : " Search by username. Do not include any spaces."
-            }
-          />
-          <button disabled={isSubmitting} type="submit">
-            Search
-          </button>
+          {input}
+          <button type="submit">Search</button>
         </div>
         {errors.username && (
           <span className="username-error-message">
