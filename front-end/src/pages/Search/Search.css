@@ -51,3 +51,8 @@ form {
 .tweet-div {
   margin-bottom: 20px;
 }
+
+/* UTILITY */
+.disabled {
+  background-color: red;
+}

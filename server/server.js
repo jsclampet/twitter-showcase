@@ -24,24 +24,32 @@ app.use(express.json());
 //search for user
 app.get("/api/users/:username", async (req, res) => {
   const responseObjectArray = [];
-  const userRequest = await apiClient.get(
-    `/users/by/username/${req.params.username}?user.fields=profile_image_url`
-  );
-  const tweetRequest = await apiClient.get(
-    tweetsByUser(userRequest.data.data.id)
-  );
-  tweetRequest.data.data.forEach((item, index) => {
-    let responseObject = {
-      username: userRequest.data.data.username,
-      profile_image_url: userRequest.data.data.profile_image_url,
-      tweet_text: item.text,
-      retweet_count: item.public_metrics.retweet_count,
-      like_count: item.public_metrics.like_count,
-    };
-    responseObjectArray.push(responseObject);
-  });
+  try {
+    const userRequest = await apiClient.get(
+      `/users/by/username/${req.params.username}?user.fields=profile_image_url`
+    );
+    if (userRequest.errors) {
+      throw error();
+    }
+    const tweetRequest = await apiClient.get(
+      tweetsByUser(userRequest.data.data.id)
+    );
+    tweetRequest.data.data.forEach((item, index) => {
+      let responseObject = {
+        username: userRequest.data.data.username,
+        profile_image_url: userRequest.data.data.profile_image_url,
+        tweet_text: item.text,
+        retweet_count: item.public_metrics.retweet_count,
+        like_count: item.public_metrics.like_count,
+      };
+      responseObjectArray.push(responseObject);
+    });
 
-  res.send(responseObjectArray);
+    res.send(responseObjectArray);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 });
 
 // search for tweet

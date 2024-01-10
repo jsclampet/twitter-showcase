@@ -25,9 +25,11 @@ const Search = () => {
       ? axios
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
           .then(({ data }) => setTweets(data))
+          .catch((err) => console.log(err))
       : axios
           .get(`http://localhost:3002/api/users/${searchQuery}`)
-          .then(({ data }) => setTweets(data));
+          .then(({ data }) => setTweets(data))
+          .catch((err) => console.log(err));
   };
 
   let input;
