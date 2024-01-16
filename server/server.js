@@ -1,12 +1,11 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const app = express();
 const axios = require("axios").default;
 
-const token =
-  "AAAAAAAAAAAAAAAAAAAAAPly9QAAAAAAQP4Qf6PfN0NeU4L5keo%2B7kae%2Fs0%3DEQIp2W7jkVldFBLvOOFtSJXl2vWEe3f1J1STKMTyWEbsogNYfE";
-const getTweetsUrl =
-  "https://api.twitter.com/2/tweets/search/recent?user.fields=profile_image_url&tweet.fields=text,public_metrics&expansions=author_id&query=";
+const token = process.env.BEARER_TOKEN;
+const getTweetsUrl = process.env.GET_TWEETS_URL;
 const tweetsByUser = (userID) => {
   return `https://api.twitter.com/2/users/${userID}/tweets?tweet.fields=public_metrics&exclude=replies`;
 };
@@ -28,9 +27,6 @@ app.get("/api/users/:username", async (req, res) => {
     const userRequest = await apiClient.get(
       `/users/by/username/${req.params.username}?user.fields=profile_image_url`
     );
-    if (userRequest.errors) {
-      throw error();
-    }
     const tweetRequest = await apiClient.get(
       tweetsByUser(userRequest.data.data.id)
     );
@@ -48,7 +44,7 @@ app.get("/api/users/:username", async (req, res) => {
     res.send(responseObjectArray);
   } catch (err) {
     console.log(err);
-    res.send(err);
+    res.status(400).json();
   }
 });
 
