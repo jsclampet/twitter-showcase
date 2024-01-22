@@ -20,13 +20,14 @@ const PORT = process.env.PORT || 3002;
 app.use(express.static("../front-end/dist"));
 app.use(express.json());
 
-//search for user
 app.get("/api/users/:username", async (req, res) => {
   const responseObjectArray = [];
   try {
     const userRequest = await apiClient.get(
       `/users/by/username/${req.params.username}?user.fields=profile_image_url`
     );
+    if (!userRequest.data.data) throw new Error("User not found");
+
     const tweetRequest = await apiClient.get(
       tweetsByUser(userRequest.data.data.id)
     );
@@ -44,32 +45,38 @@ app.get("/api/users/:username", async (req, res) => {
     res.send(responseObjectArray);
   } catch (err) {
     console.log(err);
-    res.status(400).json();
+    return res.status(400).send(err.message);
   }
 });
 
-// search for tweet
 app.get("/api/tweets/:query", async (req, res) => {
-  const tweetRequest = await apiClient.get(getTweetsUrl + req.params.query);
+  try {
+    const tweetRequest = await apiClient.get(getTweetsUrl + req.params.query);
+    if (!tweetRequest.data.includes)
+      throw new Error(
+        `Could not find tweet content containing "${req.params.query}"`
+      );
+    const userIDs = tweetRequest.data.includes.users.map((item) => item.id);
+    const tweetAuthorIDs = tweetRequest.data.data.map((item) => item.author_id);
 
-  const userIDs = tweetRequest.data.includes.users.map((item) => item.id);
-  const tweetAuthorIDs = tweetRequest.data.data.map((item) => item.author_id);
+    const responseObjectArray = [];
+    tweetRequest.data.data.forEach((tweetData, index) => {
+      const userIndex = userIDs.indexOf(tweetAuthorIDs[index]);
+      const responseObject = {
+        username: tweetRequest.data.includes.users[userIndex].username,
+        profile_image_url:
+          tweetRequest.data.includes.users[userIndex].profile_image_url,
+        tweet_text: tweetData.text,
+        retweet_count: tweetData.public_metrics.retweet_count,
+        like_count: tweetData.public_metrics.like_count,
+      };
+      responseObjectArray.push(responseObject);
+    });
 
-  const responseObjectArray = [];
-  tweetRequest.data.data.forEach((tweetData, index) => {
-    const userIndex = userIDs.indexOf(tweetAuthorIDs[index]);
-    const responseObject = {
-      username: tweetRequest.data.includes.users[userIndex].username,
-      profile_image_url:
-        tweetRequest.data.includes.users[userIndex].profile_image_url,
-      tweet_text: tweetData.text,
-      retweet_count: tweetData.public_metrics.retweet_count,
-      like_count: tweetData.public_metrics.like_count,
-    };
-    responseObjectArray.push(responseObject);
-  });
-
-  res.send(responseObjectArray);
+    res.send(responseObjectArray);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // showcase
