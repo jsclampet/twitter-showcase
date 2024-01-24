@@ -26,7 +26,7 @@ app.get("/api/users/:username", async (req, res) => {
     const userRequest = await apiClient.get(
       `/users/by/username/${req.params.username}?user.fields=profile_image_url`
     );
-    if (!userRequest.data.data) throw new Error("User not found");
+    if (userRequest.data.errors) throw new Error("User not found");
 
     const tweetRequest = await apiClient.get(
       tweetsByUser(userRequest.data.data.id)
@@ -76,6 +76,7 @@ app.get("/api/tweets/:query", async (req, res) => {
     res.send(responseObjectArray);
   } catch (err) {
     console.log(err);
+    res.status(400).send(err.message);
   }
 });
 

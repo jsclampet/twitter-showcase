@@ -13,6 +13,7 @@ const Search = () => {
   const [apiOption, setApiOption] = useState("tweet");
   const [searchQuery, setSearchQuery] = useState("");
   const [tweets, setTweets] = useState<Tweet[]>();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -21,15 +22,22 @@ const Search = () => {
   } = useForm<FormValues>();
 
   const onSubmit = () => {
+    setErrorMessage("");
     apiOption === "tweet"
       ? axios
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
           .then(({ data }) => setTweets(data))
-          .catch((err) => console.log(err))
+          .catch((err) => {
+            console.log(err);
+            setErrorMessage(err);
+          })
       : axios
           .get(`http://localhost:3002/api/users/${searchQuery}`)
           .then(({ data }) => setTweets(data))
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err.response.data);
+            setErrorMessage(err.response.data);
+          });
   };
 
   let input;
@@ -39,7 +47,7 @@ const Search = () => {
         {...register("tweet", {
           maxLength: {
             value: 30,
-            message: "For optimal results, keep search to 30 character maximum",
+            message: "Keep search to a maximum length of 30 characters",
           },
         })}
         onInput={(e) => {
@@ -53,9 +61,9 @@ const Search = () => {
     input = (
       <input
         {...register("username", {
-          minLength: {
-            value: 4,
-            message: "Please enter at LEAST 4 characters",
+          pattern: {
+            value: /^[A-Za-z0-9_]{1,15}$/,
+            message: "Characters must be an underscore or alphanumeric value.",
           },
           maxLength: {
             value: 15,
@@ -94,6 +102,7 @@ const Search = () => {
         {errors.username && (
           <span className="error-message">{errors.username.message}</span>
         )}
+        {errorMessage && <h3>{errorMessage}</h3>}
         {errors.tweet && (
           <span className="error-message">{errors.tweet.message}</span>
         )}
