@@ -28,7 +28,10 @@ const Search = () => {
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
           .then(({ data }) => setTweets(data))
           .catch((err) => {
-            console.log(err);
+            console.log(
+              "TWEET ERR front end... .≥ .. .. .. . . . .. . . . .. ",
+              err
+            );
             setErrorMessage(err);
           })
       : axios
