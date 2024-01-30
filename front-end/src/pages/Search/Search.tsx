@@ -26,13 +26,14 @@ const Search = () => {
     apiOption === "tweet"
       ? axios
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
-          .then(({ data }) => setTweets(data))
+          .then(({ data }) => {
+            // if (data.status >= 400)
+            console.log("SUCCESS TWEET API >>>>>>>> ", data);
+            setTweets(data);
+          })
           .catch((err) => {
-            console.log(
-              "TWEET ERR front end... .≥ .. .. .. . . . .. . . . .. ",
-              err
-            );
-            setErrorMessage(err);
+            console.log("TWEET ERROR >>>>>> ", err.message);
+            setErrorMessage(err.message);
           })
       : axios
           .get(`http://localhost:3002/api/users/${searchQuery}`)

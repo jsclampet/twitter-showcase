@@ -52,7 +52,7 @@ app.get("/api/users/:username", async (req, res) => {
 app.get("/api/tweets/:query", async (req, res) => {
   try {
     const tweetRequest = await apiClient.get(getTweetsUrl + req.params.query);
-    if (!tweetRequest.data.includes)
+    if (tweetRequest.data.status >= 400)
       throw new Error(
         `Could not find tweet content containing "${req.params.query}"`
       );
@@ -75,7 +75,7 @@ app.get("/api/tweets/:query", async (req, res) => {
 
     res.send(responseObjectArray);
   } catch (err) {
-    console.log(err);
+    console.log("TALSKDFJASLDKFJASDL;KFGJ", err.message);
     res.status(400).send(err.message);
   }
 });
