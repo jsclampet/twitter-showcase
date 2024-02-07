@@ -27,10 +27,10 @@
   margin: auto;
 }
 .top-img {
-  background-image: url(`/public/twitterapp.jpg`);
+  background-image: url('/twitterapp.jpg');
 }
 .bottom-img {
-  background-image: url(`twitter-showcase/public/twitterpillow.jpg`);
+  background-image: url('/twitterpillow.jpg');
 }
 .app-title {
   margin-bottom: 30px; 

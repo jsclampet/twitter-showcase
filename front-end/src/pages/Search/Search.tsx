@@ -28,19 +28,21 @@ const Search = () => {
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
           .then(({ data }) => {
             // if (data.status >= 400)
-            console.log("SUCCESS TWEET API >>>>>>>> ", data);
+            console.log(data);
             setTweets(data);
           })
           .catch((err) => {
-            console.log("TWEET ERROR >>>>>> ", err.message);
+            console.log(err);
             setErrorMessage(err.message);
+            setTweets(undefined);
           })
       : axios
           .get(`http://localhost:3002/api/users/${searchQuery}`)
           .then(({ data }) => setTweets(data))
           .catch((err) => {
-            console.log(err.response.data);
+            console.log(err.response);
             setErrorMessage(err.response.data);
+            setTweets(undefined);
           });
   };
 
@@ -112,14 +114,15 @@ const Search = () => {
         )}
       </form>
       <div className="tweets-container">
-        {tweets &&
-          tweets.map((tweet) => {
-            return (
-              <div key={crypto.randomUUID()} className="tweet-div">
-                <TweetCard tweetData={tweet} />
-              </div>
-            );
-          })}
+        {tweets === undefined
+          ? null
+          : tweets.map((tweet) => {
+              return (
+                <div key={crypto.randomUUID()} className="tweet-div">
+                  <TweetCard tweetData={tweet} />
+                </div>
+              );
+            })}
       </div>
     </div>
   );

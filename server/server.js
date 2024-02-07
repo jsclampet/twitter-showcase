@@ -27,10 +27,18 @@ app.get("/api/users/:username", async (req, res) => {
       `/users/by/username/${req.params.username}?user.fields=profile_image_url`
     );
     if (userRequest.data.errors) throw new Error("User not found");
+    if (userRequest.data.status >= 400) throw new Error("Something went wrong");
 
     const tweetRequest = await apiClient.get(
       tweetsByUser(userRequest.data.data.id)
     );
+
+    if (!tweetRequest.data.data) {
+      throw new Error(
+        `User "${req.params.username}" exists, but not tweet content was found`
+      );
+    }
+
     tweetRequest.data.data.forEach((item, index) => {
       let responseObject = {
         username: userRequest.data.data.username,
@@ -42,7 +50,7 @@ app.get("/api/users/:username", async (req, res) => {
       responseObjectArray.push(responseObject);
     });
 
-    res.send(responseObjectArray);
+    res.status(200).send(responseObjectArray);
   } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
@@ -52,10 +60,12 @@ app.get("/api/users/:username", async (req, res) => {
 app.get("/api/tweets/:query", async (req, res) => {
   try {
     const tweetRequest = await apiClient.get(getTweetsUrl + req.params.query);
-    if (tweetRequest.data.status >= 400)
+    if (tweetRequest.data.response.status >= 400) {
       throw new Error(
         `Could not find tweet content containing "${req.params.query}"`
       );
+    }
+
     const userIDs = tweetRequest.data.includes.users.map((item) => item.id);
     const tweetAuthorIDs = tweetRequest.data.data.map((item) => item.author_id);
 
@@ -73,9 +83,9 @@ app.get("/api/tweets/:query", async (req, res) => {
       responseObjectArray.push(responseObject);
     });
 
-    res.send(responseObjectArray);
+    res.status(200).send(responseObjectArray);
   } catch (err) {
-    console.log("TALSKDFJASLDKFJASDL;KFGJ", err.message);
+    console.log(err.message);
     res.status(400).send(err.message);
   }
 });

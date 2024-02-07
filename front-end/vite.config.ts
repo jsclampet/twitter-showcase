@@ -11,6 +11,6 @@ export default defineConfig({
   },
   resolve: {
     // Ensure .tsx files are included as valid extensions
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx',]
   },
 })
