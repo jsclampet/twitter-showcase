@@ -27,7 +27,6 @@ const Search = () => {
       ? axios
           .get(`http://localhost:3002/api/tweets/${searchQuery}`)
           .then(({ data }) => {
-            // if (data.status >= 400)
             console.log(data);
             setTweets(data);
           })

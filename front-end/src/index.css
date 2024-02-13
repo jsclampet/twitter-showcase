@@ -9,6 +9,7 @@
 }
 body, html {
   background-color: #0A0F22;
+  min-height: 100vh;
 }
 h1 {
   font-family: 'Noto Sans', sans-serif;
