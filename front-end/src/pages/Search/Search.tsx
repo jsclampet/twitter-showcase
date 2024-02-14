@@ -74,7 +74,7 @@ const Search = () => {
             value: 15,
             message: "You can only enter a maximum of 15 characters",
           },
-          validate: (fieldValue) => {
+          validate: (fieldValue: string) => {
             return (
               !fieldValue.includes(" ") || "Username cannot include any spaces."
             );
