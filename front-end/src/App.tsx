@@ -5,7 +5,6 @@ import Search from "./pages/Search/Search";
 import Showcase from "./pages/Showcase/Showcase";
 import { FaHome, FaSearch } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
-import React from "react";
 
 const App = () => {
   return (
