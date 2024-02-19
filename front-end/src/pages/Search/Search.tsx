@@ -3,6 +3,7 @@ import "./Search.css";
 import axios from "axios";
 import TweetCard, { Tweet } from "../../components/TweetCard/TweetCard";
 import { useForm } from "react-hook-form";
+import React from "react";
 
 interface FormValues {
   username: string;

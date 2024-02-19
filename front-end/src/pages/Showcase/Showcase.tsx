@@ -3,6 +3,7 @@ import TweetCard from "../../components/TweetCard/TweetCard";
 import { Tweet } from "../../components/TweetCard/TweetCard";
 import axios from "axios";
 import { useState } from "react";
+import React from "react";
 
 const Showcase = () => {
   const defaultTweet = {

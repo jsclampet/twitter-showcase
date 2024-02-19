@@ -1,5 +1,5 @@
 import "./TweetCard.css";
-
+import React from "react";
 export interface Tweet {
   tweet_text: string;
   username: string;
