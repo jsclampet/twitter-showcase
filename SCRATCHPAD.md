@@ -33,3 +33,12 @@
 
 - #1D2233
 - #BAC7CC
+
+
+
+>>>>>>>>>>
+
+
+What I've learned:
+
+- A lot more about deployment, npm scripts, build process, and a better grasp/persective of deploying from different environments
