@@ -17,7 +17,7 @@ const apiClient = axios.create({
 
 const PORT = process.env.PORT || 3002;
 const buildPath = path.join(__dirname, "..", "front-end", "dist");
-console.log(buildPath);
+
 app.use(express.static(buildPath));
 app.use(express.json());
 

@@ -25,7 +25,7 @@ const Search = () => {
     setErrorMessage("");
     apiOption === "tweet"
       ? axios
-          .get(`http://localhost:3002/api/tweets/${searchQuery}`)
+          .get(`/api/tweets/${searchQuery}`)
           .then(({ data }) => {
             console.log(data);
             setTweets(data);
@@ -36,7 +36,7 @@ const Search = () => {
             setTweets(undefined);
           })
       : axios
-          .get(`http://localhost:3002/api/users/${searchQuery}`)
+          .get(`/api/users/${searchQuery}`)
           .then(({ data }) => setTweets(data))
           .catch((err) => {
             console.log(err.response);
