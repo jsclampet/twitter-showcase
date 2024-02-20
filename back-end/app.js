@@ -15,9 +15,10 @@ const apiClient = axios.create({
   headers: { Authorization: `Bearer ${token}` },
 });
 
-const PORT = process.env.PORT || 3002;
-
-app.use(express.static("../front-end/dist"));
+const PORT = process.env.PORT || 3003;
+const buildPath = path.join(__dirname, "..", "front-end", "dist");
+console.log(buildPath);
+app.use(express.static(buildPath));
 app.use(express.json());
 
 app.get("/api/users/:username", async (req, res) => {
