@@ -15,10 +15,10 @@ const Showcase = () => {
   };
 
   const [tweet, setTweet] = useState<Tweet>(defaultTweet);
-  const PORT = window.location.port || "3002";
+  const port = window.location.port || 3002;
 
   const getTweet = () => {
-    axios.get(`http://localhost:${PORT}/api/showcase`).then((response) => {
+    axios.get(`http://localhost:${port}/api/showcase`).then((response) => {
       setTweet(response.data);
     });
   };
