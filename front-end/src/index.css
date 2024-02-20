@@ -15,3 +15,6 @@ h1 {
   font-family: 'Noto Sans', sans-serif;
   text-align: center;
 }
+button:hover {
+  cursor: pointer;
+}
