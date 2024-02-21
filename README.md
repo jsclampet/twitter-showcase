@@ -10,13 +10,11 @@ View it [here](https://twitter-showcase-1bin.onrender.com/home)
 
 ## Summary
 
-This app allows you to view recent Tweets based on a specific user or text.
+This application, designed with React/TS on the frontend and NodeJS/Express on the backend, enables efficient searching for Twitter users and tweets. When a user submits a search, the frontend sends a GET request to the backend, which then triggers a corresponding GET request to the Twitter API. Once the Twitter API responds, the backend checks for errors, formats the data, and sends it back to the frontend for display to the user.
 
-It is a fullstack app utilizing React/Typescript on the front-end, and NodeJS/Express on the back-end. When a user queries a validated input, the Front-end sends a GET request to the Back-end, which triggers a corresponding GET request to the Twitter API. Once the Twitter API sends a response, the back-end will check for errors, format the data and send it back to the Front-End, which in turn is displayed to the user. 
+Navigating the Twitter API's various access tiers was initially challenging. I thoroughly reviewed the API documentation to ensure I was authorized to make specific requests and access the needed information. Every request to this API required authorization via a bearer token, so I used dotenv variables for confidentiality and configured the bearer token within an axios instance, streamlining the codebase by eliminating unnecessary lines.
 
-The Twitter API consisted of several teirs of access that was difficult to parse through intially. I had to thoroughly read through and review their API documentation in order to make sure I was authorized to make specific requests and get the information I needed.
-
-I learned that deploying a fullstack app is very different from deploying a static website. Upon successful deployment I deepend my understanding of npm scripts, the build process and deploying from different environments. 
+I learned that deploying a fullstack app is very different from deploying a static website. Upon successful deployment, I deepened my understanding of npm scripts, the build process, and the nuances of deploying across different environments.
 
 ## Author
 - John Clampet: FullStack Software Developer
