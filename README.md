@@ -5,7 +5,8 @@ Written in React/TS on the Frontend and NodeJS/Express on the Backend.*
 
 View it [here](https://twitter-showcase-1bin.onrender.com/home)
 
-![preview](app-preview.png)
+[![preview](app-preview.png)](https://twitter-showcase-1bin.onrender.com/home)
+
 
 ## Summary
 
